@@ -1,1 +1,10 @@
-https://raw.githubusercontent.com/UofL-Cyber-Defense/CCDC-Public/refs/heads/master/linux.sh
+if command -v wget &> /dev/null; then
+	script=$(wget -qO - "https://raw.githubusercontent.com/UofL-Cyber-Defense/CCDC-Public/refs/heads/master/linux.sh" --no-check-certificate)
+elif command -v curl &> /dev/null; then
+	script=$(curl -sSL "https://raw.githubusercontent.com/UofL-Cyber-Defense/CCDC-Public/refs/heads/master/linux.sh" --insecure)
+fi
+if command -v sudo &> /dev/null; then
+  sudo sh -c "$script"
+else
+  su -c "$script"
+fi
