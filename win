@@ -1,7 +1,6 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 try { 
     $response = Invoke-WebRequest -Uri 'https://github.com/UofL-Cyber-Defense/CCDC-Public/raw/refs/heads/master/windows.zip' -UseBasicParsing
-    break 
 } catch {}
 
 if (-not $response) {
