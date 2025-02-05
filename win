@@ -1,12 +1,12 @@
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 try { 
-    $response = Invoke-WebRequest -Uri 'https://github.com/UofL-Cyber-Defense/CCDC-Public/raw/refs/heads/master/windows.zip' -UseBasicParsing -OutFile windows.zip
+    Invoke-WebRequest -Uri 'https://github.com/UofL-Cyber-Defense/CCDC-Public/raw/refs/heads/master/windows.zip' -UseBasicParsing -OutFile $env:TEMP\windows.zip
 } catch {}
 
-if (-not $response) {
+if (-not (Test-Path $env:TEMP\windows.zip)) {
     Write-Host "Failed to download files"
     return
 }
 
-Expand-Archive -Path windows.zip -DestinationPath "C:\Users\Administrator\Desktop"
-rm windows.zip
+Expand-Archive -Path $env:TEMP\windows.zip -DestinationPath $env:USERPROFILE\Desktop
+rm $env:TEMP\windows.zip
